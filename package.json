@@ -1,0 +1,51 @@
+{
+  "name": "atablang",
+  "displayName": "aTabLang",
+  "description": "This extension is a syntax tool for calculated fields in Tableau.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "publisher": "UpholdHQ",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages":
+      [{
+        "id": "twbl",
+        "icon": 
+        {
+          "light": "C:\\Users\\uphol\\.vscode\\extensions\\pkief.material-icon-theme-4.32.0\\icons\\favicon.svg",
+          "dark": "C:\\Users\\uphol\\.vscode\\extensions\\pkief.material-icon-theme-4.32.0\\icons\\favicon.svg"
+        },
+        "aliases": 
+        [
+          "aTabLang",
+          "atablang",
+          "TabLang",
+          "tablang",
+          "twbl"
+        ],
+        "extensions": 
+        [
+          ".twbl"
+        ],
+        "configuration": "./language-configuration.json"
+      }],
+    "grammars": 
+      [{
+        "language": "twbl",
+        "scopeName": "source.twbl",
+        "path": "./syntaxes/twbl.tmLanguage.json"
+      }],
+    "snippets": 
+      [{
+        "language": "twbl",
+        "path": "./snippets/twbl.json"
+      }]
+  },
+  "devDependencies": {
+    "vscode-tmgrammar-test": "^0.1.2"
+  }
+}
