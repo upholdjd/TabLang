@@ -1,0 +1,70 @@
+{
+	"scopeName": "source.twbl",
+	"patterns": [
+		{ "include": "#strings" },
+		{ "include": "#numbers" },
+		{ "include": "#expression" },
+		{ "include": "#operators" },
+		{ "include": "#functions" },
+		{ "include": "#comments" },
+		{ "include": "#logics" }
+	],
+	"repository": {
+		"expression": {
+			"patterns": [
+				{ "include": "#letter" },
+				{ "include": "#paren-expression" }
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"match": "'[^']*'",
+					"name": "string.quoted.single.twbl"
+				},
+				{
+					"match": "\"[^\"]*\"",
+					"name": "string.quoted.double.twbl"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "'[^']*'",
+					"name": "string.quoted.single.twbl"
+				},
+				{
+					"match": "\"[^\"]*\"",
+					"name": "string.quoted.double.twbl"
+				}
+			]
+		},
+		"comments": {
+			"begin": "//",
+			"end": ".*$",
+			"match": "//.*$",
+			"name": "comment.line.double-slash"
+		},
+		"functions": {
+			"match": "\\b(ABS|ACOS|AREA|ASCII|ASIN|ATAN|ATAN2|ATTR|AVG|B|BUFFER|C|CEILING|CHAR|COLLECT|CONTAINS|CORR|COS|COT|COUNT|COUNTD|COVAR|COVARP|D|DATE|DATEADD|DATEDIFF|DATENAME|DATEPARSE|DATEPART|DATETIME|DATETRUNC|DAY|DEGREES|DISTANCE|DIV|DOMAIN|E|ENDSWITH|ENDSWITH|EXCLUDE|EXP|F|FIND|FINDNTH|FIRST|FIXED|FLOAT|FLOOR|FULLNAME|G|GET_JSON_OBJECT|GROUP_CONCAT|H|HEXBINX|HEXBINY|HOST|I|IFNULL|IN|INCLUDE|INDEX|INT|INTERSECTS|ISDATE|ISFULLNAME|ISMEMBEROF|ISNULL|ISOQUARTER|ISOWEEK|ISOWEEKDAY|ISOYEAR|ISUSERNAME|J|K|L|LAST|LEFT|LEN|LENGTH|LN|LOG|LOG2|LOOKUP|LOWER|LTRIM|LTRIM_THIS|M|MAKEDATE|MAKEDATETIME|MAKELINE|MAKEPOINT|MAKETIME|MAX|MEDIAN|MID|MIN|MODEL_PERCENTILE|MODEL_QUANTILE|MONTH|N|NOT|NOW|O|OR|OUTLINE|P|PARSE_URL|PARSE_URL_QUERY|PERCENTILE|PI|POWER|PREVIOUS_VALUE|PROPER|Q|Quarter|R|RADIANS|RIGHT|ROUND|RTRIM|RTRIM_THIS|S|SHAPETYPE|SIGN|SIN|SIZE|SPACE|SPLIT|SQRT|SQUARE|STARTSWITH|STDEV|STDEVP|STR|SUM|T|TAN|THEN|TIMESTAMP_TO_USEC|TLD|TODAY|TOTAL|TRIM|U|UPPER|USEC_TO_TIMESTAMP|USERDOMAIN|USERNAME|V|VAR|VARP|W|WEEK|X|Y|YEAR|Z|ZN)\\b",
+			"name": "keyword.functions.twbl"
+		},
+		"logics": {
+			"match": "\\b(AND|IF|ELSEIF|ELSE|THEN|WHILE|CASE|END|IN|WHEN|NOT|OR)\\b",
+			"name": "keyword.control.less.twbl"
+		},
+		"operators": {
+			"match": "=|\\+|-|>|<|%|/|\\*|!=",
+			"name": "keyword.control.twbl"
+		},
+		"paren-expression": {
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": { "0": { "name": "punctuation.paren.beginning" } },
+			"endCaptures": { "0": { "name": "punctuation.paren.close" } },
+			"name": "expression.group",
+			"patterns": [ { "include": "#expression" } ]
+		}
+	}
+}
