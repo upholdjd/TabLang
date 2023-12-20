@@ -1,0 +1,46 @@
+IF SUM([Total Completed]) >= 0 AND COUNT([Total Completed])<= 20 THEN "0-20%"
+ELSEIF COUNT([Total Completed]) >= 21 AND COUNT([Total Completed])<= 40 THEN "21-40%"
+ELSEIF [Total Completed] >= 41 AND [Total Completed]<=60 THEN "41-60%"
+ELSEIF [Total Completed] >= 61 AND [Total Completed]<=80 THEN "61-80%"
+ELSEIF [Total Completed] >= 81 AND AVG([Total Completed])<=100 THEN "81-100%"
+ELSE 1.25 * 45
+// This is a comment
+END
+
+IF CONTAINS([Selections], STR([Month Year])) = FALSE THEN
+    // Value has never been initialized, so it's unchecked.
+    IF [Toggle]="Unchecked" THEN
+        "Keep"
+    ELSE
+        "Hide"
+    END
+ELSEIF CONTAINS([Selections], [Month/Toggle]) THEN
+    "Keep"
+ELSE
+    "Hide"
+END
+
+IF CONTAINS([Selections], STR([Month Year])) = FALSE THEN
+    // Value has never been initialized, so it's unchecked.
+    "Hide"
+ELSEIF CONTAINS([Selections], STR([Month Year]) + "|Checked") THEN
+    "Keep"
+ELSE
+    "Hide"
+END
+
+// What is the value that will be added to the parameter?
+IF [Toggle]="Checked" THEN
+    STR([Month Year]) + "|" + "Unchecked"
+ELSE
+    STR([Month Year]) + "|" + "Checked"
+END
+
+// Default selection to show the last 3 months
+// Need LOD to make it "viz-independent" for use as default value in the parameter.
+// Be sure to add ";" at the beginning.
+{FIXED : MAX(
+    ";" + STR([Max Month]) + "|Checked;"
+        + STR(DATEADD('month', -1, [Max Month])) + "|Checked;"
+        + STR(DATEADD('month', -2, [Max Month])) + "|Checked"
+)}
