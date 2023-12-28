@@ -1,61 +1,95 @@
 {
+	"name": "aTabLang",
 	"scopeName": "source.twbl",
 	"patterns": [
 		{ "include": "#strings" },
 		{ "include": "#numbers" },
-		{ "include": "#expression" },
 		{ "include": "#operators" },
-		{ "include": "#functions" },
 		{ "include": "#comments" },
+		{ "include": "#fields" },
+		{ "include": "#function" },
+		{ "include": "#functions-date" },
+		{ "include": "#functions-text" },
+		{ "include": "#functions-number" },
+		{ "include": "#functions-lod" },
+		{ "include": "#functions-tablecalc" },
+		{ "include": "#functions-aggregate" },
 		{ "include": "#logics" }
 	],
 	"repository": {
 		"expression": {
 			"patterns": [
-				{ "include": "#letter" },
+				{ "include": "#function" },
 				{ "include": "#paren-expression" }
 			]
 		},
 		"strings": {
 			"patterns": [
 				{
-					"match": "'[^']*'",
+					"match": "\\'[^\\']*\\'",
 					"name": "string.quoted.single.twbl"
 				},
 				{
-					"match": "\"[^\"]*\"",
+					"match": "\\\"[^\\\"]*\\\"",
 					"name": "string.quoted.double.twbl"
+				}
+			]
+		},
+		"fields": {
+			"patterns": [
+				{
+					"match": "[\\[].*?[\\])]",	
+					"name": "support.function.other.variable.twbl"
 				}
 			]
 		},
 		"numbers": {
 			"patterns": [
 				{
-					"match": "'[^']*'",
-					"name": "string.quoted.single.twbl"
-				},
-				{
-					"match": "\"[^\"]*\"",
-					"name": "string.quoted.double.twbl"
+					"match": "\\b(\\-?)?(\\d+(?:\\.\\d+)?|0[\\d]+)\\b",
+					"name": "constant.character.escape.twbl"
 				}
 			]
 		},
 		"comments": {
-			"begin": "//",
-			"end": ".*$",
-			"match": "//.*$",
-			"name": "comment.line.double-slash"
+			"patterns": [
+				{
+					"begin": "\/\/.",
+					"end": ".+$",
+					"name": "comment.double-slash.twbl"
+				}
+			]
 		},
-		"functions": {
-			"match": "\\b(ABS|ACOS|AREA|ASCII|ASIN|ATAN|ATAN2|ATTR|AVG|B|BUFFER|C|CEILING|CHAR|COLLECT|CONTAINS|CORR|COS|COT|COUNT|COUNTD|COVAR|COVARP|D|DATE|DATEADD|DATEDIFF|DATENAME|DATEPARSE|DATEPART|DATETIME|DATETRUNC|DAY|DEGREES|DISTANCE|DIV|DOMAIN|E|ENDSWITH|ENDSWITH|EXCLUDE|EXP|F|FIND|FINDNTH|FIRST|FIXED|FLOAT|FLOOR|FULLNAME|G|GET_JSON_OBJECT|GROUP_CONCAT|H|HEXBINX|HEXBINY|HOST|I|IFNULL|IN|INCLUDE|INDEX|INT|INTERSECTS|ISDATE|ISFULLNAME|ISMEMBEROF|ISNULL|ISOQUARTER|ISOWEEK|ISOWEEKDAY|ISOYEAR|ISUSERNAME|J|K|L|LAST|LEFT|LEN|LENGTH|LN|LOG|LOG2|LOOKUP|LOWER|LTRIM|LTRIM_THIS|M|MAKEDATE|MAKEDATETIME|MAKELINE|MAKEPOINT|MAKETIME|MAX|MEDIAN|MID|MIN|MODEL_PERCENTILE|MODEL_QUANTILE|MONTH|N|NOT|NOW|O|OR|OUTLINE|P|PARSE_URL|PARSE_URL_QUERY|PERCENTILE|PI|POWER|PREVIOUS_VALUE|PROPER|Q|Quarter|R|RADIANS|RIGHT|ROUND|RTRIM|RTRIM_THIS|S|SHAPETYPE|SIGN|SIN|SIZE|SPACE|SPLIT|SQRT|SQUARE|STARTSWITH|STDEV|STDEVP|STR|SUM|T|TAN|THEN|TIMESTAMP_TO_USEC|TLD|TODAY|TOTAL|TRIM|U|UPPER|USEC_TO_TIMESTAMP|USERDOMAIN|USERNAME|V|VAR|VARP|W|WEEK|X|Y|YEAR|Z|ZN)\\b",
+		"functions-date": {
+			"match": "\\b(DATE|DATEADD|DATEDIFF|DATENAME|DATEPARSE|DATEPART|DATETIME|DATETRUNC|DAY|ISDATE|ISOQUARTER|ISOWEEK|ISOWEEKDAY|ISOYEAR|MAKEDATE|MAKEDATETIME|MAKETIME|MONTH|NOW|Quarter|TODAY|WEEK|YEAR)\\b",
 			"name": "keyword.functions.twbl"
 		},
+		"functions-text": {
+			"match": "\\b(ASCII|CHAR|CONTAINS|ENDSWITH|FIND|FINDNTH|LEFT|LEN|LOWER|LTRIM|MAX|MID|MIN|PROPER|REPLACE|RIGHT|RTRIM|SPACE|SPLIT|STARTSWITH|STR|TRIM|UPPER)\\b",
+			"name": "keyword.functions.twbl"
+		},
+		"functions-number": {
+			"match": "\\b(ABS|ACOS|ASIN|ATAN|ATAN2|CEILING|COT|DEGREES|DIV|EXP|FLOOR|HEXBINX|HEXBINY|LN|LOG|MAX|MIN|PI|POWER|RADIANS|ROUND|SIGN|SIN|SQRT|SQUARE|TAN|ZN)\\b",
+			"name": "entity.name.function.method.ahk2"
+		},
+		"functions-lod": {
+			"match": "\\b(FIXED|INCLUDE|EXCLUDE)\\b",
+			"name": "keyword.control.twbl"
+		},
+		"functions-tablecalc": {
+			"match": "\\b(FIRST|INDEX|LAST|LOOKUP|MODEL_EXTENSION_BOOL|MODEL_EXTENSION_INT|MODEL_EXTENSION_REAL|MODEL_EXTENSION_STRING|MODEL_PERCENTILE|MODEL_QUANTILE|PREVIOUS_VALUE|RANK|RANK_DENSE|RANK_MODIFIED|RANK_PERCENTILE|RANK_UNIQUE|RUNNING_AVG|RUNNING_COUNT|RUNNING_MAX|RUNNING_MIN|RUNNING_SUM|SIZE|SCRIPT_BOOL|SCRIPT_INT|SCRIPT_REAL|SCRIPT_STR|TOTAL|WINDOW_AVG|WINDOW_CORR|WINDOW_COUNT|WINDOW_COVAR|WINDOW_COVARP|WINDOW_MEDIAN|WINDOW_MAX|WINDOW_MIN|WINDOW_PERCENTILE|WINDOW_STDEV|WINDOW_STDEVP|WINDOW_VAR|WINDOW_VARP)\\b",
+			"name": "keyword.functions.twbl"
+		},
+		"functions-aggregate": {
+			"match": "\\b(ATTR|INDEX|AVG|COLLECT|CORR|COUNT|COUNTD|COVAR|COVARP|MAX|MEDIAN|MIN|PERCENTILE|STDEV|STDEVP|SUM|VAR|VARP)\\b",
+			"name": "entity.other.attribute-name.twbl"
+		},
 		"logics": {
-			"match": "\\b(AND|IF|ELSEIF|ELSE|THEN|WHILE|CASE|END|IN|WHEN|NOT|OR)\\b",
-			"name": "keyword.control.less.twbl"
+			"match": "\\bAND|IF|ELSEIF|ELSE|THEN|WHILE|CASE|END|IN|WHEN|NOT|OR\\b",
+			"name": "keyword.functions.twbl"
 		},
 		"operators": {
-			"match": "=|\\+|-|>|<|%|/|\\*|!=",
+			"match": "\\b\\=|\\+|\\-|\\>|\\<|\\=|\\%|\\\\|\\*|\\!=|TRUE|FALSE\\b",
 			"name": "keyword.control.twbl"
 		},
 		"paren-expression": {
@@ -63,8 +97,8 @@
 			"end": "\\)",
 			"beginCaptures": { "0": { "name": "punctuation.paren.beginning" } },
 			"endCaptures": { "0": { "name": "punctuation.paren.close" } },
-			"name": "expression.group",
-			"patterns": [ { "include": "#expression" } ]
+			"name": "keyword.language.twbl",
+			"patterns": [ { "include": "#logics" } ]
 		}
 	}
 }
