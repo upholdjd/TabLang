@@ -3,49 +3,72 @@
   "displayName": "aTabLang",
   "description": "This extension is a syntax tool for calculated fields in Tableau.",
   "version": "0.0.1",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
+  "activationEvents": [
+    "onLanguage:atablang",
+    "workspaceContains:*/.twbl",
+    "workspaceContains:*/*.twbl"
+  ],
   "publisher": "UpholdHQ",
   "categories": [
     "Programming Languages"
   ],
+  "icon": "pie-chart",
+  "main": "./client/out/extension",
   "contributes": {
-    "languages":
-      [{
+    "configurationDefaults": {
+      "editor.wordWrap": "on",
+      "files.autoSave": "onFocusChange",
+      "[atablang]": {
+        "editor.semanticHighlighting.enabled": true
+      }
+    },
+    "languages": [
+      {
         "id": "twbl",
-        "icon": 
-        {
+        "icon": {
           "light": "C:\\Users\\uphol\\.vscode\\extensions\\pkief.material-icon-theme-4.32.0\\icons\\favicon.svg",
           "dark": "C:\\Users\\uphol\\.vscode\\extensions\\pkief.material-icon-theme-4.32.0\\icons\\favicon.svg"
         },
-        "aliases": 
-        [
+        "aliases": [
           "aTabLang",
           "atablang",
           "TabLang",
           "tablang",
           "twbl"
         ],
-        "extensions": 
-        [
+        "extensions": [
           ".twbl"
         ],
-        "configuration": "./language-configuration.json"
-      }],
-    "grammars": 
-      [{
+        "configuration": "./twbl.language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
         "language": "twbl",
         "scopeName": "source.twbl",
         "path": "./syntaxes/twbl.tmLanguage.json"
-      }],
-    "snippets": 
-      [{
+      }
+    ],
+    "snippets": [
+      {
         "language": "twbl",
         "path": "./snippets/twbl.json"
-      }]
+      }
+    ]
   },
   "devDependencies": {
     "vscode-tmgrammar-test": "^0.1.2"
+  },
+  "dependencies": {
+    "@hurx/textmate-grammar-builder": "^1.1.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.0.0"
+  },
+  "scripts": {
+    "lint": "eslint ./client/src ./server/src --ext .twbl"
   }
 }
