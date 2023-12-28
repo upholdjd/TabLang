@@ -2,6 +2,8 @@
 
 This extension provides syntax highlighting for Tableau calculations in VS Code. 
 
+![alt text]([http://url/to/img.png](https://github.com/upholdjd/TabLang/blob/main/TabLang.png))
+
 ## Features
 
 The extension highlights the following items:
