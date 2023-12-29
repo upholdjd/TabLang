@@ -17,7 +17,7 @@
     "Programming Languages"
   ],
   "icon": "pie-chart",
-  "main": "./client/out/extension",
+  "main": "./out/extension",
   "contributes": {
     "configurationDefaults": {
       "editor.wordWrap": "on",
@@ -65,10 +65,15 @@
   },
   "dependencies": {
     "@hurx/textmate-grammar-builder": "^1.1.0",
+    "@types/node": "^20.10.5",
+    "@types/vscode": "^1.85.0",
     "vscode-oniguruma": "^2.0.1",
     "vscode-textmate": "^9.0.0"
   },
   "scripts": {
-    "lint": "eslint ./client/src ./server/src --ext .twbl"
+    "lint": "eslint ./client/src ./server/src --ext .twbl",
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
